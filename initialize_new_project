@@ -1,0 +1,7 @@
+to initialize a new project "npm init --y"
+you will get node modules once you install a module like express
+
+to start the db from data.sql you need to psql < data.sql
+
+and then psql
+then c\ usersdb
