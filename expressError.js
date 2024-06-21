@@ -1,3 +1,5 @@
+const app = require('./app')
+
 class ExpressError extends Error {
   constructor(message, status) {
       super();
@@ -16,10 +18,8 @@ app.use((req, res, next) => {
   return next(err);
  
  });
- 
- 
+
  // General error handler
- 
  app.use((err, req, res, next) => {
  
   res.status(err.status || 500);
@@ -27,7 +27,6 @@ app.use((req, res, next) => {
   return res.json({
  
     error: err.message,
- 
     status: err.status
  
   });
@@ -36,7 +35,6 @@ app.use((req, res, next) => {
  
  
  
- your route would look like this
  
  
  
