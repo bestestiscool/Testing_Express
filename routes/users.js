@@ -13,19 +13,75 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+// router.get('/:id', async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     const results = await db.query('SELECT * FROM users WHERE id = $1',[id]);
+//     if (results.rows.length === 0) {
+//       throw new ExpressError(`Can't find user with id of ${id}`, 404);
+//     }
+//     return res.send({ user: results.rows[0] })
+//   } catch (e) {
+//     return next(e);
+//   }
+// });
+
+// router.get('/:id', async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     const userId = parseInt(id, 10);
+//     // Validate user ID
+//     if (isNaN(userId) || userId <= 0) {
+//       throw new ExpressError(`Invalid user ID: ${id}`, 400);
+//     }
+//     const results = await db.query('SELECT * FROM users WHERE id = $1', [userId]);
+//     if (results.rows.length === 0) {
+//       throw new ExpressError(`Can't find user with id of ${id}`, 404);
+//     }
+//     return res.send({ user: results.rows[0] });
+//   } catch (e) {
+//     return next(e);
+//   }
+//  });
+
+ router.get('/:id', async (req, res, next) => {
+ 
   try {
+ 
     const { id } = req.params;
-    const results = await db.query('SELECT * FROM users WHERE id = $1',[id]);
-    if (results.rows.length === 0) {
-      throw new ExpressError(`Can't find user with id of ${id}`, 404);
+ 
+    const userId = parseInt(id, 10);
+ 
+ 
+    // Validate user ID
+ 
+    if (isNaN(userId) || userId <= 0) {
+ 
+      throw new ExpressError(`Invalid user ID: ${id}`, 400);
+ 
     }
-    console.log(">>>>>>>>>>>>>>>>>",id)
-    return res.send({ user: results.rows[0] })
+ 
+ 
+    const results = await db.query('SELECT * FROM users WHERE id = $1', [userId]);
+ 
+    if (results.rows.length === 0) {
+ 
+      throw new ExpressError(`Can't find user with id of ${id}`, 404);
+ 
+    }
+ 
+    
+ 
+    return res.send({ user: results.rows[0] });
+ 
   } catch (e) {
+ 
     return next(e);
+ 
   }
-});
+ 
+ });
+ 
 
 router.get('/search', async (req, res, next) => {
   try {

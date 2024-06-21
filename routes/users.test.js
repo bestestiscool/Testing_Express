@@ -48,9 +48,14 @@ describe("GET /users/:id", () => {
   });
 
   test("Responds with 404 for invalid id", async () => {
+ 
     const res = await request(app).get(`/users/0`);
+ 
     expect(res.statusCode).toBe(404);
-  }, 10000); // Increase timeout to 10 seconds
+ 
+    expect(res.body).toEqual({ error: 'Invalid user ID: 0', status: 400 });
+ 
+  }, 10000);
   
   
 });
